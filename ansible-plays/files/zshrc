@@ -1,0 +1,85 @@
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH="/data/datastore/hadoop/.oh-my-zsh"
+
+ZSH_THEME="gnzh"
+
+plugins=(history)
+
+source $ZSH/oh-my-zsh.sh
+
+export EDITOR=vim
+
+# HADOOP
+export HADOOP_VERSION=3.3.5
+export GEOMESA_ACCUMULO_VERSION=5.0.0
+export SPARK_VERSION=3.5.1
+export GEOSERVER_VERSION=2.17.3
+export ZOOKEEPER_VERSION=3.4.14
+export ACCUMULO_VERSION=2.0.1
+export SCALA_VERSION=2.12
+
+export PDSH_RCMD_TYPE=ssh
+export HADOOP_HOME=/data/datastore/hadoop/hadoop/$HADOOP_VERSION
+export HADOOP_INSTALL=$HADOOP_HOME
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export HADOOP_YARN_HOME=$HADOOP_HOME
+export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
+export YARN_HOME=$HADOOP_HOME
+export LD_LIBRARY_PATH=$HADOOP_HOME/lib/native
+
+# ACCUMULO
+export ACCUMULO_HOME=/data/datastore/hadoop/accumulo/accumulo-$ACCUMULO_VERSION
+
+# PATH w/ HDFS and GEOMESA ACCUMULO
+export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$ACCUMULO_HOME/bin:/data/datastore/hadoop/geomesa/geomesa-accumulo_$SCALA_VERSION-$GEOMESA_ACCUMULO_VERSION/bin
+
+# ZOOKEEPER
+export ZOOKEEPER_HOME=/data/datastore/hadoop/zookeeper/zookeeper-$ZOOKEEPER_VERSION
+
+# GEOSERVER
+export GEOSERVER_HOME=/data/datastore/hadoop/geoserver/geoserver-$GEOSERVER_VERSION
+
+# GEOMESA
+export GEOMESA_ACCUMULO_HOME=/data/datastore/hadoop/geomesa/geomesa-accumulo_$GEOMESA_ACCUMULO_VERSION
+export GEOMESA_SPARK_JARS=/data/datastore/hadoop/geomesa/libs
+#export GEOMESA_EXTRA_CLASSPATHS=/data/datastore/hadoop/geomesa/libs/ivx-data-format.jar
+
+# SPARK
+export SPARK_HOME=/data/datastore/hadoop/spark/spark-$SPARK_VERSION
+
+# VIRTUALENV
+export PATH=$HOME/.local/bin:$PATH
+export WORKON_HOME=~/.virtualenvs
+mkdir -p ~/.virtualenvs
+source ~/.local/bin/virtualenvwrapper.sh 
+
+
+# general
+alias src='source ~/.zshrc'
+alias v='sudo vim'
+alias gc='git clone'
+alias ns='sudo netstat -tulpn | grep LISTEN'
+alias chotm='sudo chown -R $USER:$USER .'
+alias mkx='sudo chmod +x'
+alias pse='sudo ps -ef | grep'
+alias ss='sudo systemctl'
+alias cps='rsync --progress'
+
+#hadoop
+alias cda='cd ~/accumulo/accumulo-$ACCUMULO_VERSION/bin'
+alias cdh='cd ~/hadoop/hadoop-$HADOOP_VERSION'
+
+# disk 
+alias sgf='sudo sg_format -F --size=512 -Q -e'
+alias sgs='sudo sg_turs -p'   
+
+# ubuntu 
+alias sai="sudo apt install"
+alias sau="sudo apt update && sudo apt upgrade"
