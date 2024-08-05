@@ -4,7 +4,7 @@
   vars:
     zsh_dependencies: []
   tasks:
-    - name: Ensure Zsh with dependencies are installed
+    - name: Ensure zsh with dependencies are installed
       apt:
         name: "{{ ['zsh'] + zsh_dependencies }}"
         state: present
@@ -15,18 +15,26 @@
         name: hadoop
         shell: /usr/bin/zsh
 
-    - name: Download Oh My Zsh installation script
+    - name: Download ohmyzsh installation script
       get_url:
         url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
         dest: /tmp/install_ohmyzsh.sh
 
-    - name: Run Oh My Zsh installation script as hadoop user
+    - name: Run ohmyzsh installation script as hadoop user
       become: true
       command: sudo -u hadoop sh /tmp/install_ohmyzsh.sh --unattended
       register: ohmyzsh_result
       failed_when: "'FAILED' in ohmyzsh_result.stderr"
 
-    - name: Clean up Oh My Zsh installation script
+    - name: Clean up ohmyzsh installation script
       file:
         path: /tmp/install_ohmyzsh.sh
         state: absent
+
+    - name: Copy .zshrc to hadoop user's home directory
+      copy:
+        src: files/zshrc
+        dest: /data/datastore/hadoop/.zshrc
+        owner: hadoop
+        group: hadoop
+        mode: '0644'
