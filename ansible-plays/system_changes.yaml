@@ -1,0 +1,45 @@
+- name: Update system configuration for limits and swappiness
+  hosts: all
+  become: true
+  tasks:
+    - name: Ensure hard nproc limit is set
+      lineinfile:
+        path: /etc/security/limits.conf
+        line: "* hard nproc 65536"
+        state: present
+        create: yes
+
+    - name: Ensure soft nproc limit is set
+      lineinfile:
+        path: /etc/security/limits.conf
+        line: "* soft nproc 65536"
+        state: present
+        create: yes
+
+    - name: Ensure hard nofile limit is set
+      lineinfile:
+        path: /etc/security/limits.conf
+        line: "* hard nofile 65536"
+        state: present
+        create: yes
+
+    - name: Ensure soft nofile limit is set
+      lineinfile:
+        path: /etc/security/limits.conf
+        line: "* soft nofile 65536"
+        state: present
+        create: yes
+
+    - name: Ensure vm.swappiness is set
+      lineinfile:
+        path: /etc/sysctl.conf
+        line: "vm.swappiness = 0"
+        state: present
+        create: yes
+
+    - name: Apply sysctl settings
+      sysctl:
+        name: vm.swappiness
+        value: 0
+        state: present
+        reload: yes
