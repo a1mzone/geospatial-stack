@@ -1,0 +1,38 @@
+- name: Setup Hadoop user and environment
+  hosts: all
+  become: true
+  tasks:
+    - name: Ensure the directory exists
+      file:
+        path: /data/datastore/hadoop
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Create hadoop user with home directory
+      user:
+        name: hadoop
+        home: /data/datastore/hadoop
+        create_home: yes
+        state: present
+
+    - name: Change ownership of the directory
+      file:
+        path: /data/datastore/hadoop
+        state: directory
+        owner: hadoop
+        group: hadoop
+        recurse: yes
+
+    - name: Add hadoop user to sudo group
+      user:
+        name: hadoop
+        groups: sudo
+        append: yes
+
+    - name: Set the password for hadoop user
+      user:
+        name: hadoop
+        #password: "{{ 'newpassword' | password_hash('sha512') }}"
+        password: 'as'
