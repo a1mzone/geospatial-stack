@@ -1,0 +1,54 @@
+- name: Setup Zookeeper
+  hosts: all
+
+  tasks:
+    - name: Zookeeper
+      block:
+        - name: Download Zookeeper
+          get_url:
+            url: "https://archive.apache.org/dist/zookeeper/zookeeper-3.4.14/zookeeper-3.4.14.tar.gz"
+            dest: "~/files/zookeeper-3.4.14.tar.gz"
+
+        - name: Extract Zookeeper
+          unarchive:
+            src: "~/files/zookeeper-3.4.14.tar.gz"
+            dest: "~/zookeeper"
+            remote_src: yes
+        
+        - name: Copy zoo.cfg to Zookeeper conf directory
+          copy:
+            src: files/zoo.cfg
+            dest: ~/zookeeper/zookeeper-3.4.14/conf/zoo.cfg
+
+        - name: Copy zookeeper.service to systemd
+          become: yes
+          copy:
+            src: files/zookeeper.service
+            dest: /etc/systemd/system/
+
+        - name: Move folder from /old/location to /new/location
+          become: yes
+          command: mv /home/{{ ansible_user }}/zookeeper /data/datastore/hadoop/       
+
+        - name: Change owner
+          become: yes
+          command: chown hadoop:hadoop -R /data/datastore/hadoop
+
+        - name: Daemon Reload
+          become: yes
+          command: systemctl daemon-reload
+
+        - name: Daemon Enable
+          become: yes
+          command: systemctl enable zookeeper.service
+
+        - name: Daemon Start
+          become: yes
+          command: systemctl start zookeeper.service
+
+# THIS WOULD TIMEOUT - SO GOING FOR COMMANDS INSTEAD 
+        # - name: Start Zookeeper service
+        #   systemd:
+        #     name: zookeeper
+        #     state: started
+        #     enabled: yes       
