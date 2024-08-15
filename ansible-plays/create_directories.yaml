@@ -16,81 +16,88 @@
         - zookeeper
         - files
 
-    - name: Download Hadoop tarball
-      get_url:
-        url: "https://archive.apache.org/dist/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz"
-        dest: "~/files/hadoop-3.3.6.tar.gz"
-
-    - name: Extract Hadoop tarball
-      unarchive:
-        src: "~/files/hadoop-3.3.6.tar.gz"
-        dest: "~/hadoop/"
-        remote_src: yes
-
-    - name: Download and extract Accumulo
+    - name: Zookeeper
       block:
-        - name: Download Accumulo tarball
-          get_url:
-            url: "https://archive.apache.org/dist/accumulo/2.0.1/accumulo-2.0.1-bin.tar.gz"
-            dest: "~/files/accumulo-2.0.1.tar.gz"
-        
-        - name: Extract Accumulo tarball
-          unarchive:
-            src: "~/files/accumulo-2.0.1.tar.gz"
-            dest: "~/accumulo"
-            remote_src: yes
-
-    - name: Download and extract Zookeeper
-      block:
-        - name: Download Zookeeper tarball
+        - name: Download Zookeeper
           get_url:
             url: "https://archive.apache.org/dist/zookeeper/zookeeper-3.4.14/zookeeper-3.4.14.tar.gz"
             dest: "~/files/zookeeper-3.4.14.tar.gz"
 
-        - name: Extract Zookeeper tarball
+        - name: Extract Zookeeper
           unarchive:
             src: "~/files/zookeeper-3.4.14.tar.gz"
             dest: "~/zookeeper"
             remote_src: yes
-
-    - name: Download and extract Toree
-      block:     
-        - name: Download Toree tarball
-          get_url:
-            url: "https://files.pythonhosted.org/packages/7a/91/9de4d532162e934b7f881fd34869e84998434b5a5220a5679e480457818f/toree-0.5.0.tar.gz"
-            dest: "~/files/toree-0.5.0.tar.gz"
-
-        - name: Extract Toree tarball
-          unarchive:
-            src: "~/files/toree-0.5.0.tar.gz"
-            dest: "~/toree"
-            remote_src: yes
-
-    - name: Download and extract Geomesa
-      block:
-        - name: Download Geomesa tarball
-          get_url:
-            url: "https://github.com/locationtech/geomesa/releases/download/geomesa-5.0.1/geomesa-accumulo_2.12-5.0.1-bin.tar.gz"
-            dest: "~/files/geomesa_2.12-5.0.1.tar.gz"
-
-        - name: Extract Geomesa tarball
-          unarchive:
-            src: "~/files/geomesa_2.12-5.0.1.tar.gz"
-            dest: "~/geomesa"
-            remote_src: yes
-
-    - name: Download and extract Spark
-      block:
-        - name: Download Spark tgz file
-          get_url:
-            url: "https://archive.apache.org/dist/spark/spark-3.5.1/spark-3.5.1-bin-hadoop3.tgz"
-            dest: "~/files/spark-3.5.1.tgz"
         
-        - name: Extract Spark tgz file
-          unarchive:
-            src: "~/files/spark-3.5.1.tgz"
-            dest: "~/spark"
-            remote_src: yes
+        - name: Copy zoo.cfg to Zookeeper conf directory
+          copy:
+            src: files/zoo.cfg
+            dest: ~/zookeeper/zookeeper-3.4.14/conf/zoo.cfg
 
-        - name: Move extracted files to final destination
-          command: mv ~/spark/spark-3.5.1-bin-hadoop3 ~/spark/spark-3.5.1
+    # - name: Download Hadoop tarball
+    #   get_url:
+    #     url: "https://archive.apache.org/dist/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz"
+    #     dest: "~/files/hadoop-3.3.6.tar.gz"
+
+    # - name: Extract Hadoop tarball
+    #   unarchive:
+    #     src: "~/files/hadoop-3.3.6.tar.gz"
+    #     dest: "~/hadoop/"
+    #     remote_src: yes
+
+    # - name: Download and extract Accumulo
+    #   block:
+    #     - name: Download Accumulo tarball
+    #       get_url:
+    #         url: "https://archive.apache.org/dist/accumulo/2.0.1/accumulo-2.0.1-bin.tar.gz"
+    #         dest: "~/files/accumulo-2.0.1.tar.gz"
+        
+    #     - name: Extract Accumulo tarball
+    #       unarchive:
+    #         src: "~/files/accumulo-2.0.1.tar.gz"
+    #         dest: "~/accumulo"
+    #         remote_src: yes
+
+
+
+    # - name: Download and extract Toree
+    #   block:     
+    #     - name: Download Toree tarball
+    #       get_url:
+    #         url: "https://files.pythonhosted.org/packages/7a/91/9de4d532162e934b7f881fd34869e84998434b5a5220a5679e480457818f/toree-0.5.0.tar.gz"
+    #         dest: "~/files/toree-0.5.0.tar.gz"
+
+    #     - name: Extract Toree tarball
+    #       unarchive:
+    #         src: "~/files/toree-0.5.0.tar.gz"
+    #         dest: "~/toree"
+    #         remote_src: yes
+
+    # - name: Download and extract Geomesa
+    #   block:
+    #     - name: Download Geomesa tarball
+    #       get_url:
+    #         url: "https://github.com/locationtech/geomesa/releases/download/geomesa-5.0.1/geomesa-accumulo_2.12-5.0.1-bin.tar.gz"
+    #         dest: "~/files/geomesa_2.12-5.0.1.tar.gz"
+
+    #     - name: Extract Geomesa tarball
+    #       unarchive:
+    #         src: "~/files/geomesa_2.12-5.0.1.tar.gz"
+    #         dest: "~/geomesa"
+    #         remote_src: yes
+
+    # - name: Download and extract Spark
+    #   block:
+    #     - name: Download Spark tgz file
+    #       get_url:
+    #         url: "https://archive.apache.org/dist/spark/spark-3.5.1/spark-3.5.1-bin-hadoop3.tgz"
+    #         dest: "~/files/spark-3.5.1.tgz"
+        
+    #     - name: Extract Spark tgz file
+    #       unarchive:
+    #         src: "~/files/spark-3.5.1.tgz"
+    #         dest: "~/spark"
+    #         remote_src: yes
+
+    #     - name: Move extracted files to final destination
+    #       command: mv ~/spark/spark-3.5.1-bin-hadoop3 ~/spark/spark-3.5.1
