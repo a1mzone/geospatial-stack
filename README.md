@@ -4,16 +4,17 @@ This is the setup for a GeoMesa Accumulo stack running in a self hosted environm
 
 ### Structure
 
-/data/{datastore,hdfs,tmp}/
+/data/datastore/hadoop      --> Hadoop user home direcotry
+/data/hdfs/{nvme0,nvme1}/{dfs,namenode}    --> HDFS disks
+/data/tmp/{spark,hdfs}      --> Spark & HDFS tmp
 
-datastore will have a hadoop folder that is the hadoop users home directory
 
-hdfs is the directory we format for the namenode
+hdfs is where we mount disks for hadoop data (specific optimized formatting)
 
-tmp is a tmp directory where all temp dirs live (spark, hdfs, etc)
+tmp is where we mount a disk with good write endurance (typically 10 DWPD)
 
-Mounting different types of disk for each is recommended 
+This will assume that you have mounted your drives to your needs for tmp, hdfs, and hadoop user home.
 
-This will assume that you have mounted your drives to your needs for tmp, hdfs, and data.
+Typically I have a drive mounted on /data that stores the files, users etc, a second write intensive drive on tmp and then lastly drives for hdfs data.
 
-Typically I have a drive mounted on /data that stores the files, users etc, a second write intensive drive on tmp and then lastly a drive 
+
