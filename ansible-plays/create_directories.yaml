@@ -71,16 +71,13 @@
         - name: Download Geomesa tarball
           get_url:
             url: "https://github.com/locationtech/geomesa/releases/download/geomesa-5.0.1/geomesa-accumulo_2.12-5.0.1-bin.tar.gz"
-            dest: "~/files/geomesa-5.0.1.tar.gz"
+            dest: "~/files/geomesa_2.12-5.0.1.tar.gz"
 
         - name: Extract Geomesa tarball
           unarchive:
-            src: "~/files/geomesa-5.0.1.tar.gz"
+            src: "~/files/geomesa_2.12-5.0.1.tar.gz"
             dest: "~/geomesa"
             remote_src: yes
-
-        - name: Move extracted files to final destination
-          command: mv ~/geomesa/geomesa-accumulo_2.12-5.0.1 ~/geomesa/geomesa-5.0.1
 
     - name: Download and extract Spark
       block:
