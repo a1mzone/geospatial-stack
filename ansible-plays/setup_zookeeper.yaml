@@ -26,7 +26,7 @@
             src: files/zookeeper.service
             dest: /etc/systemd/system/
 
-        - name: Move folder from /old/location to /new/location
+        - name: Move folder to hadoop home
           become: yes
           command: mv /home/{{ ansible_user }}/zookeeper /data/datastore/hadoop/       
 
