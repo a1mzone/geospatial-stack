@@ -6,6 +6,12 @@ Task Order:
 
     * Create the Hadoop User
     * Setup ohmyzsh
-    * Install python and virtualenvwrapper
-    * Create folder structure, download files
     * Set system changes - file limits and swappiness
+    * Install packages (java, python and virtualenvwrapper)
+    * Create folder structure
+    * Setup: 
+        Zookeeper
+        HDFS
+        Accumulo
+
+    

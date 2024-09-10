@@ -7,6 +7,16 @@
         name: openjdk-8-jdk
         state: present
 
+    - name: Install pdsh
+      apt:
+        name: pdsh
+        state: present
+
+    - name: Install netstat
+      apt:
+        name: net-tools
+        state: present
+
     # - name: Install OpenJDK 11
     #   apt:
     #     name: openjdk-11-jdk
