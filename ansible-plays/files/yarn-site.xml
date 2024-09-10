@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<configuration>
+
+<!-- Site specific YARN configuration properties -->
+  <property>
+          <name>yarn.nodemanager.aux-services</name>
+          <value>mapreduce_shuffle</value>
+  </property>
+
+  <property>
+    <description>Enable auto-detection of node capabilities such as
+    memory and CPU.
+    </description>
+    <name>yarn.nodemanager.resource.detect-hardware-capabilities</name>
+    <value>false</value>
+  </property>
+
+  <property>
+    <description>Percentage of CPU that can be allocated
+    for containers. This setting allows users to limit the amount of
+    CPU that YARN containers use. Currently functional only
+    on Linux using cgroups. The default is to use 100% of CPU.
+    </description>
+    <name>yarn.nodemanager.resource.percentage-physical-cpu-limit</name>
+    <value>100</value>
+  </property>
+
+  <property>
+    <description>Multiplier to determine how to convert phyiscal cores to
+    vcores. This value is used if yarn.nodemanager.resource.cpu-vcores
+    is set to -1(which implies auto-calculate vcores) and
+    yarn.nodemanager.resource.detect-hardware-capabilities is set to true. The
+    number of vcores will be calculated as
+    number of CPUs * multiplier.
+    </description>
+    <name>yarn.nodemanager.resource.pcores-vcores-multiplier</name>
+    <value>2.0</value>
+  </property>
+
+  <property>
+    <description>Amount of physical memory, in MB, that can be allocated
+    for containers. If set to -1 and
+    yarn.nodemanager.resource.detect-hardware-capabilities is true, it is
+    automatically calculated(in case of Windows and Linux).
+    In other cases, the default is 8192MB.
+    </description>
+    <name>yarn.nodemanager.resource.memory-mb</name>
+    <value>65536</value>
+  </property>
+
+  <property>
+    <description>The maximum allocation for every container request at the RM
+    in MBs. Memory requests higher than this will throw an
+    InvalidResourceRequestException.</description>
+    <name>yarn.scheduler.maximum-allocation-mb</name>
+    <value>16384</value>
+  </property>
+	  	  
+  <property>
+    <description>Container swappiness is the likelihood a page will be swapped
+      out compared to be kept in memory. Value is between 0-100.
+    </description>
+    <name>yarn.nodemanager.resource.memory.cgroups.swappiness</name>
+    <value>0</value>
+  </property>
+
+  <property>
+    <description>The hostname of the NM.</description>
+    <name>yarn.nodemanager.hostname</name>
+    <value>0.0.0.0</value>
+  </property>
+
+</configuration>
