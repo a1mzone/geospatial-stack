@@ -15,3 +15,34 @@
         - toree
         - zookeeper
         - files
+
+    - name: Change owner for hadoop disk
+      become: yes
+      command: chown hadoop:hadoop -R /data/hdfs
+
+    - name: Create dir for HDFS DFS
+      become: yes
+      file:
+        path: /data/hdfs/nvme0/dfs
+        state: directory
+        owner: hadoop
+        group: hadoop
+        mode: '0755'
+
+    - name: Create dir for HDFS Namenode
+      become: yes
+      file:
+        path: /data/hdfs/nvme0/namenode
+        state: directory
+        owner: hadoop
+        group: hadoop
+        mode: '0755'
+
+    - name: Create dir for HDFS tmp
+      become: yes
+      file:
+        path: /data/tmp/hdfs
+        state: directory
+        owner: hadoop
+        group: hadoop
+        mode: '0755'
