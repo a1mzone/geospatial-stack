@@ -12,6 +12,9 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR=vim
 
+# JAVS
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+
 # HADOOP
 export HADOOP_VERSION=3.3.6
 export GEOMESA_ACCUMULO_VERSION=5.0.1
@@ -22,7 +25,7 @@ export ACCUMULO_VERSION=2.0.1
 export SCALA_VERSION=2.12
 
 export PDSH_RCMD_TYPE=ssh
-export HADOOP_HOME=/data/datastore/hadoop/hadoop/$HADOOP_VERSION
+export HADOOP_HOME=/data/datastore/hadoop/hadoop/hadoop-$HADOOP_VERSION
 export HADOOP_INSTALL=$HADOOP_HOME
 export HADOOP_MAPRED_HOME=$HADOOP_HOME
 export HADOOP_COMMON_HOME=$HADOOP_HOME
