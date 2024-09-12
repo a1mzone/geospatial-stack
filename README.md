@@ -2,6 +2,10 @@
 
 This is the setup for a GeoMesa Accumulo stack running in a self hosted environment.
 
+At the moment these plays do the majority of the setup for Zookeeper, Hadoop and Accumulo. 
+
+In the future GeoMesa with Spark and Toree will be included.
+
 ### Structure
 
     /data/datastore/hadoop                      --> Hadoop user home directory
