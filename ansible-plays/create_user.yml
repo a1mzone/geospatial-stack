@@ -34,5 +34,5 @@
     - name: Set the password for hadoop user
       user:
         name: hadoop
-        #password: "{{ 'newpassword' | password_hash('sha512') }}"
-        password: 'as'
+        password: "{{ 'newpassword' | password_hash('sha512') }}"
+        # password: 'as'

@@ -4,13 +4,13 @@
 <configuration>
 <property>
 	<name>dfs.namenode.name.dir</name>
-  <value>/data/hdfs/nvme0/namenode</value>
-  <!-- <value>/data/hdfs/nvme0/namenode,/data/hdfs/nvme1/namenode</value> -->
+  <value>/data/hdfs/ssd0/namenode</value>
+  <!-- <value>/data/hdfs/ssd0/namenode,/data/hdfs/ssd1/namenode</value> -->
 </property>
 <property>
 	<name>dfs.datanode.data.dir</name>
-  <value>/data/hdfs/nvme0/dfs</value>
-  <!-- <value>/data/hdfs/nvme0/dfs,/data/hdfs/nvme1/dfs</value> -->
+  <value>/data/hdfs/ssd0/dfs</value>
+  <!-- <value>/data/hdfs/ssd0/dfs,/data/hdfs/ssd1/dfs</value> -->
 </property>
 <property>
 	<name>dfs.replication</name><value>1</value>

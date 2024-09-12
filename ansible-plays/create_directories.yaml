@@ -1,4 +1,4 @@
-- name: Create directories, download files and extract
+- name: Create directories
   hosts: all
 
   tasks:
@@ -23,7 +23,7 @@
     - name: Create dir for HDFS DFS
       become: yes
       file:
-        path: /data/hdfs/nvme0/dfs
+        path: /data/hdfs/ssd0/dfs
         state: directory
         owner: hadoop
         group: hadoop
@@ -32,14 +32,14 @@
     - name: Create dir for HDFS Namenode
       become: yes
       file:
-        path: /data/hdfs/nvme0/namenode
+        path: /data/hdfs/ssd0/namenode
         state: directory
         owner: hadoop
         group: hadoop
         mode: '0755'
 
     - name: Create dir for HDFS tmp
-      become: yes
+      become: yes     
       file:
         path: /data/tmp/hdfs
         state: directory

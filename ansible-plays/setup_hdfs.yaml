@@ -4,70 +4,69 @@
   tasks:
     - name: HDFS - hadoop
       block:
-        # - name: Download Hadoop
-        #   get_url:
-        #     url: "https://archive.apache.org/dist/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz"
-        #     dest: "~/files/hadoop-3.3.6.tar.gz"
+        - name: Download Hadoop
+          get_url:
+            url: "https://archive.apache.org/dist/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz"
+            dest: "~/files/hadoop-3.3.6.tar.gz"
 
-        # - name: Extract Hadoop
-        #   unarchive:
-        #     src: "~/files/hadoop-3.3.6.tar.gz"
-        #     dest: "~/hadoop/"
-        #     remote_src: yes
+        - name: Extract Hadoop
+          unarchive:
+            src: "~/files/hadoop-3.3.6.tar.gz"
+            dest: "~/hadoop/"
+            remote_src: yes
 
-        # - name: Copy core-site.xml to etc/hadoop
-        #   copy:
-        #     src: files/core-site.xml
-        #     dest: ~/hadoop/hadoop-3.3.6/etc/hadoop/
+        - name: Copy core-site.xml to etc/hadoop
+          copy:
+            src: files/core-site.xml
+            dest: ~/hadoop/hadoop-3.3.6/etc/hadoop/
 
-        # - name: Copy hdfs-site.xml to etc/hadoop
-        #   copy:
-        #     src: files/hdfs-site.xml
-        #     dest: ~/hadoop/hadoop-3.3.6/etc/hadoop/
+        - name: Copy hdfs-site.xml to etc/hadoop
+          copy:
+            src: files/hdfs-site.xml
+            dest: ~/hadoop/hadoop-3.3.6/etc/hadoop/
 
-        # - name: Copy mapred-site.xml to etc/hadoop
-        #   copy:
-        #     src: files/mapred-site.xml
-        #     dest: ~/hadoop/hadoop-3.3.6/etc/hadoop/
+        - name: Copy mapred-site.xml to etc/hadoop
+          copy:
+            src: files/mapred-site.xml
+            dest: ~/hadoop/hadoop-3.3.6/etc/hadoop/
 
-        # - name: Copy yarn-site.xml to etc/hadoop
-        #   copy:
-        #     src: files/yarn-site.xml
-        #     dest: ~/hadoop/hadoop-3.3.6/etc/hadoop/
+        - name: Copy yarn-site.xml to etc/hadoop
+          copy:
+            src: files/yarn-site.xml
+            dest: ~/hadoop/hadoop-3.3.6/etc/hadoop/
 
-        # - name: Copy hadoop-env.sh to etc/hadoop
-        #   copy:
-        #     src: files/hadoop-env.sh
-        #     dest: ~/hadoop/hadoop-3.3.6/etc/hadoop/
+        - name: Copy hadoop-env.sh to etc/hadoop
+          copy:
+            src: files/hadoop-env.sh
+            dest: ~/hadoop/hadoop-3.3.6/etc/hadoop/
 
-        # - name: Move folder to hadoop home
-        #   become: yes
-        #   command: mv /home/{{ ansible_user }}/hadoop /data/datastore/hadoop/       
+        - name: Move folder to hadoop home
+          become: yes
+          command: mv /home/{{ ansible_user }}/hadoop /data/datastore/hadoop/       
 
-        # - name: Format Namenode
-        #   become: yes
-        #   command: /data/datastore/hadoop/hadoop/hadoop-3.3.6/bin/hdfs namenode --format
+        - name: Format Namenode
+          become: yes
+          command: /data/datastore/hadoop/hadoop/hadoop-3.3.6/bin/hdfs namenode --format
 
-        # - name: Change owner for hadoop home
-        #   become: yes
-        #   command: chown hadoop:hadoop -R /data/datastore/hadoop
+        - name: Change owner for hadoop home
+          become: yes
+          command: chown hadoop:hadoop -R /data/datastore/hadoop
 
+        # - name: Generate SSH key pair
+        #   command: ssh-keygen -t rsa -b 4096 -f /home/hadoop/.ssh/id_rsa -N ""
+        #   args:
+        #     creates: /home/hadoop/.ssh/id_rsa
 
-        - name: Generate SSH key pair
-          command: ssh-keygen -t rsa -b 4096 -f /home/hadoop/.ssh/id_rsa -N ""
-          args:
-            creates: /home/hadoop/.ssh/id_rsa
+        # - name: Copy SSH key to localhost
+        #   command: ssh-copy-id -i /home/hadoop/.ssh/id_rsa.pub localhost
+        #   register: copy_id_result
+        #   ignore_errors: yes 
 
-        - name: Copy SSH key to localhost
-          command: ssh-copy-id -i /home/hadoop/.ssh/id_rsa.pub localhost
-          register: copy_id_result
-          ignore_errors: yes 
+        # - name: Show SSH-copy-id output
+        #   debug:
+        #     msg: "{{ copy_id_result.stdout }}"
 
-        - name: Show SSH-copy-id output
-          debug:
-            msg: "{{ copy_id_result.stdout }}"
-
-        - name: Show SSH-copy-id errors
-          debug:
-            msg: "{{ copy_id_result.stderr }}"
-          when: copy_id_result.failed
+        # - name: Show SSH-copy-id errors
+        #   debug:
+        #     msg: "{{ copy_id_result.stderr }}"
+        #   when: copy_id_result.failed

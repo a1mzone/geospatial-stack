@@ -3,16 +3,40 @@
 
   tasks:
     - name: Accumulo
-    block:
-      - name: Download and extract Accumulo
-        block:
-          - name: Download Accumulo tarball
-            get_url:
-              url: "https://archive.apache.org/dist/accumulo/2.0.1/accumulo-2.0.1-bin.tar.gz"
-              dest: "~/files/accumulo-2.0.1.tar.gz"
-          
-          - name: Extract Accumulo tarball
-            unarchive:
-              src: "~/files/accumulo-2.0.1.tar.gz"
-              dest: "~/accumulo"
-              remote_src: yes
+      block:
+        - name: Download Accumulo tarball
+          get_url:
+            url: "https://archive.apache.org/dist/accumulo/2.0.1/accumulo-2.0.1-bin.tar.gz"
+            dest: "~/files/accumulo-2.0.1.tar.gz"
+        
+        - name: Extract Accumulo tarball
+          unarchive:
+            src: "~/files/accumulo-2.0.1.tar.gz"
+            dest: "~/accumulo"
+            remote_src: yes
+
+        - name: Copy start script to bin
+          copy:
+            src: files/accumulo_start.sh
+            dest: ~/accumulo/accumulo-2.0.1/bin/
+            mode: '0750'
+
+        - name: Copy stop script to bin
+          copy:
+            src: files/accumulo_stop.sh
+            dest: ~/accumulo/accumulo-2.0.1/bin/
+            mode: '0750'
+
+        - name: Copy accumulo.properties
+          copy:
+            src: files/accumulo.properties
+            dest: ~/accumulo/accumulo-2.0.1/conf/
+            mode: '0644'
+
+        - name: Move folder to hadoop home
+          become: yes
+          command: mv /home/{{ ansible_user }}/accumulo /data/datastore/hadoop/
+
+        - name: Change owner for hadoop home
+          become: yes
+          command: chown hadoop:hadoop -R /data/datastore/hadoop    
