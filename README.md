@@ -1,10 +1,19 @@
 # geospatial-stack
 
-This is the setup for a GeoMesa Accumulo stack running in a self hosted environment.
+This is the setup for a GeoMesa Accumulo stack running in a self hosted environment tested on Ubuntu 20.04
 
 At the moment these plays do the majority of the setup for Zookeeper, Hadoop and Accumulo. 
 
-In the future GeoMesa with Spark and Toree will be included.
+In the future GeoMesa with Spark (Jupyter & Toree) will be included.
+
+## Current versions 
+
+    Zookeeper   3.4.14
+    Hadoop      3.3.6
+    Accumulo    2.0.1
+    Java        1.8
+    Python      3.10
+
 
 ### Structure
 
