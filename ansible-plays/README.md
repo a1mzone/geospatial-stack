@@ -14,6 +14,8 @@ Task Order:
         HDFS
         Accumulo
 
+Execute the plays in the following order
+
     ansible-playbook -v -l hdfs create_user.yml
     ansible-playbook -v -l hdfs ohmyzsh.yaml
     ansible-playbook -v -l hdfs system_changes.yaml 
@@ -22,7 +24,8 @@ Task Order:
     ansible-playbook -v -l hdfs setup_zookeeper.yaml
     ansible-playbook -v -l hdfs setup_hdfs.yaml
 
-As hadoop user
+As the hadoop user
+
     ssh-keygen
     ssh-copy-id localhost
     cdh (the alias to cd to the hadoop base dir)
@@ -33,6 +36,7 @@ You can now visit the machine-ip:9870 in your browser and hadoop should be up an
     ansible-playbook -v -l hdfs setup_accumulo.yaml
 
 As hadoop user
+
     cda (the alias to cd to accumulo/bin)
     accumulo init (choose instance name and password)
     vim ../conf/accumulo-client.properties (edit instance name and password)
