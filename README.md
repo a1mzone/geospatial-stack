@@ -4,9 +4,9 @@ This is the setup for a GeoMesa Accumulo stack running in a self hosted environm
 
 ### Structure
 
-/data/datastore/hadoop      --> Hadoop user home direcotry
-/data/hdfs/{nvme0,nvme1}/{dfs,namenode}    --> HDFS disks
-/data/tmp/{spark,hdfs}      --> Spark & HDFS tmp
+/data/datastore/hadoop      --> Hadoop user home directory  
+/data/hdfs/{nvme0,nvme1}/{dfs,namenode}    --> HDFS disks  
+/data/tmp/{spark,hdfs}      --> Spark & HDFS tmp  
 
 
 /data/hdfs is where we mount disks for hadoop data (optimized HDFS format --> mkfs.ext4 -m1 -O dir_index,extent,sparse_super /dev/nvmeX)
@@ -31,3 +31,5 @@ Typical steps:
 Repeat the above for nvme1 and finally create the sub directories
 
     sudo mkdir -p /data/hdfs/{nvme0,nvme1}/{dfs,namenode}
+
+Next we can move to the ansible folder readme for execution instructions
